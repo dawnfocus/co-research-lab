@@ -1,0 +1,13 @@
+*
+!.gitignore
+!README.md
+!data/
+!data/.gitkeep
+!models/
+!models/.gitkeep
+!runs/
+!runs/.gitkeep
+!external/
+!external/.gitkeep
+!cache/
+!cache/.gitkeep
