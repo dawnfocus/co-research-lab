@@ -1,6 +1,17 @@
 .DS_Store
+.env
+.env.*
+!.env.example
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
+.venv/
+venv/
+
+/_trash/*
+!/_trash/.gitignore
+
+# Local walkthrough project; intentionally never published with the template.
+/demo/

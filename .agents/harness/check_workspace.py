@@ -11,8 +11,11 @@ from pathlib import Path
 
 REQUIRED_FILES = (
     "README.md",
+    "README.en.md",
     "AGENTS.md",
     ".gitignore",
+    "assets/research-workflow-hero.png",
+    "assets/workspace-flow.svg",
     "open/README.md",
     "research/INDEX.md",
     "research/NOW.md",
@@ -91,6 +94,18 @@ def main() -> int:
         for expected in ("research/NOW.md", "research/INDEX.md", ".agents/context/project.md"):
             if expected not in agents_text:
                 errors.append(f"AGENTS.md does not route to: {expected}")
+
+    readme_pairs = (
+        ("README.md", "README.en.md"),
+        ("README.en.md", "README.md"),
+    )
+    for source, target in readme_pairs:
+        source_path = root / source
+        if source_path.is_file() and target not in source_path.read_text(encoding="utf-8"):
+            errors.append(f"{source} does not link to: {target}")
+
+    if (root / "template").exists():
+        errors.append("legacy template/ wrapper must not exist")
 
     ignore_results = {probe: git_ignores(root, probe) for probe in IGNORED_PROBES}
     if any(result is not None for result in ignore_results.values()):
